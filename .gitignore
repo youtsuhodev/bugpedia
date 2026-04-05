@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+.Python
+venv/
+.venv/
+env/
+
+# Build / dist
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Environment
+.env
+.env.local
+*.local
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs & DB
+*.log
+*.sqlite3
+*.db
+
+# Test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/
+
+# Cypress
+frontend/cypress/videos/
+frontend/cypress/screenshots/
+
+# VS Code extension packaging
+*.vsix
