@@ -6,7 +6,7 @@ pull requests et le code.
 ## Démarrage rapide
 
 1. Forkez le dépôt et clonez-le localement.
-2. Suivez la section « Développement local » du `README.md`.
+2. Suivez la section « Démarrage local » du `README.md` (MySQL + NestJS + Next.js).
 3. Créez une branche : `git checkout -b feat/ma-fonctionnalite`.
 
 ## Issues

@@ -1,4 +1,5 @@
--- Bugpedia — schéma PostgreSQL (compatible SQLite avec ajustements mineurs)
+-- Bugpedia — schéma PostgreSQL (référence / alternative).
+-- Schéma **utilisé par l’API NestJS** : backend/sql/schema.mysql.sql (MySQL 8+).
 -- Contraintes métier :
 --   - is_verified => verification_count >= 3
 --   - au plus une solution vérifiée par bug (index partiel unique)
