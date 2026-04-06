@@ -28,13 +28,19 @@ Ports par défaut : **API `4000`**, **Next.js `3000`**.
 
 ### 1. Base MySQL
 
-Créer la base et les tables :
+Créer la base et les tables (au choix) :
 
 ```bash
+# Avec le client mysql
 mysql -u root -p < backend/sql/schema.mysql.sql
+
+# Ou avec Node (lit backend/.env)
+cd backend && npm run db:init
 ```
 
-(Le script crée la base `bugpedia` si elle n’existe pas.)
+Réinitialiser complètement les tables en dev : `npm run db:init:force` (destructif).
+
+(Le schéma crée la base `bugpedia`, ou celle définie par `MYSQL_DATABASE` dans `.env`.)
 
 ### 2. API (NestJS)
 

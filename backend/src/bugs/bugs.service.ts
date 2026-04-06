@@ -71,16 +71,17 @@ export class BugsService {
       params.push(`%${query.environmentContains}%`);
     }
 
-    const take = Math.min(query.limit ?? 50, 100);
-    const skip = query.offset ?? 0;
+    const take = Math.min(Math.max(0, Math.floor(Number(query.limit) || 50)), 100);
+    const skip = Math.max(0, Math.floor(Number(query.offset) || 0));
 
+    // MySQL rejette souvent LIMIT/OFFSET en placeholders (?), surtout si les valeurs
+    // arrivent en string depuis la query string — ici take/skip sont des entiers bornés.
     const sql = `
       SELECT b.* FROM bugs b
       WHERE ${conds.join(' AND ')}
       ORDER BY b.created_at DESC
-      LIMIT ? OFFSET ?
+      LIMIT ${take} OFFSET ${skip}
     `;
-    params.push(take, skip);
 
     const rows = await this.db.query<RowDataPacket[]>(sql, params);
     return rows.map(mapBugRow);
