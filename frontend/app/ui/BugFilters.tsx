@@ -9,28 +9,29 @@ export function BugFilters({
   };
 }) {
   return (
-    <form className="card stack" action="/" method="get" style={{ marginTop: '1.5rem' }}>
-      <div className="row" style={{ flexWrap: 'wrap' }}>
-        <label className="stack" style={{ flex: '1 1 200px' }}>
-          <span className="muted">Recherche</span>
-          <input name="q" type="search" placeholder="titre ou description" defaultValue={initial.q} />
+    <form className="wiki-fieldset" action="/" method="get">
+      <legend>Rechercher dans Bugpedia</legend>
+      <div className="wiki-form-grid">
+        <label className="wiki-label">
+          Texte (titre ou description)
+          <input name="q" type="search" placeholder="ex. memory leak Safari" defaultValue={initial.q} />
         </label>
-        <label className="stack" style={{ flex: '1 1 140px' }}>
-          <span className="muted">Librairie</span>
+        <label className="wiki-label">
+          Librairie
           <input name="library" placeholder="react" defaultValue={initial.library} />
         </label>
-        <label className="stack" style={{ flex: '1 1 120px' }}>
-          <span className="muted">Version</span>
+        <label className="wiki-label">
+          Version
           <input name="version" placeholder="18.2.0" defaultValue={initial.version} />
         </label>
-        <label className="stack" style={{ flex: '1 1 180px' }}>
-          <span className="muted">Environnement (texte)</span>
+        <label className="wiki-label">
+          Environnement (texte libre)
           <input name="env" placeholder="Safari, Linux…" defaultValue={initial.environmentContains} />
         </label>
       </div>
-      <div className="row">
+      <div style={{ marginTop: '0.75rem' }}>
         <button type="submit" className="primary">
-          Filtrer
+          Lancer la recherche
         </button>
       </div>
     </form>

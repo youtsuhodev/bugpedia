@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { VectorToolbar } from '@/components/vector/VectorToolbar';
 import { fetchBugs } from '@/lib/api';
 import { BugFilters } from './ui/BugFilters';
 import { BugList } from './ui/BugList';
@@ -26,30 +27,62 @@ export default async function HomePage({ searchParams }: Props) {
   }
 
   return (
-    <main>
-      <h1>Bugpedia</h1>
-      <p className="muted">
-        Documenter, relier et résoudre des bugs — recherche plein texte, filtres par stack, solutions
-        validées par la communauté.
+    <>
+      <VectorToolbar
+        namespaceTabs={[
+          { href: '/', label: 'Accueil', selected: true },
+          { label: 'Discussion', disabled: true },
+        ]}
+        viewTabs={[
+          { label: 'Lire', selected: true },
+          { href: '/docs-auth', label: 'Contribuer' },
+        ]}
+      />
+      <main id="bodyContent" className="wiki-content mw-body">
+        <header className="mw-body-header">
+          <div id="siteSub" className="mw-site-sub noprint">
+            Une page de Bugpedia, l&apos;encyclopédie libre des bugs logiciels.
+          </div>
+          <h1 id="firstHeading" className="firstHeading wiki-article-title">
+            Accueil
+          </h1>
+        </header>
+
+        <p className="wiki-hatnote">
+        Bienvenue sur <strong>Bugpedia</strong>, un projet visant à rassembler des{' '}
+        <strong>bugs documentés</strong>, des liens entre incidents et des{' '}
+        <strong>solutions vérifiées</strong> par la communauté des développeurs.
+      </p>
+
+      <p className="wiki-lead">
+        Utilisez la recherche ci-dessous pour parcourir les entrées par titre, librairie, version ou
+        environnement — comme une encyclopédie, chaque bug possède sa propre page détaillée.
       </p>
 
       <BugFilters initial={{ q, library, version, environmentContains }} />
 
       {error ? (
-        <p style={{ color: 'var(--danger)' }}>{error}</p>
+        <p className="text-danger" role="alert">
+          {error}
+        </p>
       ) : (
         <>
-          <h2>Bugs récents</h2>
+          <h2 className="wiki-h2">Liste des bugs</h2>
           <BugList bugs={bugs} />
-          <p className="muted" style={{ marginTop: '1rem' }}>
-            {bugs.length} résultat(s). Ouvrez un bug pour voir les solutions vérifiées et le graphe
-            « similaires ».
+          <p className="muted" style={{ marginTop: '0.75rem' }}>
+            <strong>{bugs.length}</strong> entrée(s) correspondant aux critères. Les pages bug
+            incluent les solutions et les liens vers des entrées similaires.
           </p>
         </>
       )}
-      <p style={{ marginTop: '2rem' }}>
-        <Link href="/docs-auth">Flux GitHub OAuth — notes MVP</Link>
-      </p>
-    </main>
+
+      <h2 className="wiki-h2">Voir aussi</h2>
+      <ul className="wiki-ul">
+        <li>
+          <Link href="/docs-auth">Aide : authentification GitHub et contribution</Link>
+        </li>
+      </ul>
+      </main>
+    </>
   );
 }

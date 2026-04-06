@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
+    "dev:reset": "node scripts/clean-next-dev.cjs && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,7 +13,7 @@
     "cypress:run": "cypress run"
   },
   "dependencies": {
-    "next": "^14.2.18",
+    "next": "^14.2.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -22,7 +23,7 @@
     "@types/react-dom": "^18.3.7",
     "cypress": "^13.17.0",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.35",
+    "eslint-config-next": "14.2.35",
     "typescript": "^5.9.3"
   }
 }

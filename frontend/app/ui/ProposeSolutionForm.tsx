@@ -28,7 +28,7 @@ export function ProposeSolutionForm({ bugId }: { bugId: string }) {
         const t = await res.text();
         throw new Error(t || res.statusText);
       }
-      setStatus('Solution envoyée. Rechargez la page.');
+      setStatus('Votre modification a été enregistrée. Rechargez la page pour l’afficher.');
       setContent('');
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Erreur');
@@ -38,15 +38,15 @@ export function ProposeSolutionForm({ bugId }: { bugId: string }) {
   }
 
   return (
-    <section className="card stack" style={{ marginTop: '1.5rem' }}>
-      <h2 style={{ margin: 0 }}>Proposer une solution</h2>
-      <p className="muted" style={{ margin: 0 }}>
-        Collez un token OAuth GitHub (scope <code>read:user</code>) ou activez{' '}
-        <code>DEV_SKIP_AUTH</code> côté API pour les essais locaux.
+    <section className="wiki-fieldset" style={{ marginTop: '1.5rem' }}>
+      <legend>Améliorer l’article — proposer une solution</legend>
+      <p className="muted" style={{ margin: '0.35rem 0 0.75rem', fontSize: '0.85rem' }}>
+        Comme sur un wiki, toute contribution doit respecter les règles du projet. Token GitHub (
+        <code>read:user</code>) ou mode <code>DEV_SKIP_AUTH</code> côté API en local.
       </p>
-      <form className="stack" onSubmit={onSubmit}>
-        <label className="stack">
-          <span className="muted">Token (Bearer)</span>
+      <form className="stack" onSubmit={onSubmit} style={{ gap: '0.65rem' }}>
+        <label className="wiki-label">
+          Jeton d’accès (Bearer), si requis
           <input
             type="password"
             autoComplete="off"
@@ -55,15 +55,21 @@ export function ProposeSolutionForm({ bugId }: { bugId: string }) {
             placeholder="gho_…"
           />
         </label>
-        <label className="stack">
-          <span className="muted">Markdown</span>
+        <label className="wiki-label">
+          Texte de la solution (Markdown possible)
           <textarea rows={8} value={content} onChange={(e) => setContent(e.target.value)} required />
         </label>
-        <button type="submit" className="primary" disabled={loading}>
-          {loading ? 'Envoi…' : 'Publier'}
-        </button>
+        <div>
+          <button type="submit" className="primary" disabled={loading}>
+            {loading ? 'Publication…' : 'Publier la solution'}
+          </button>
+        </div>
       </form>
-      {status ? <p className="muted">{status}</p> : null}
+      {status ? (
+        <p className="wiki-hatnote" style={{ marginTop: '0.75rem' }}>
+          {status}
+        </p>
+      ) : null}
     </section>
   );
 }
